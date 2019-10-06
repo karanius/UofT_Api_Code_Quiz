@@ -125,7 +125,13 @@ function result(e){
                 wrong.classList.add('hide');
             },1000)
         },0)
-        seconds = seconds - 5
+        if (seconds === 0){
+            setTimeout(()=>{
+                seconds = seconds - 5
+            },1001)
+        }else{
+            seconds = seconds - 5
+        }
         correct.classList.add('hide');
         if (dataLength.length ===0 ){
             done()
