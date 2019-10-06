@@ -10,34 +10,73 @@
 </head>
 <body>
     
+    
+    <!-- this contains everything !!!!!!!!!!!!!-->
+    <main class="container">
+        <!-- this is the Nav !!!!!!!!!!!!!-->
+        <nav class='spaceDown'>
+            <a id='highScoreLink' href="#">View Highscores</a>
+            <p>Time: <span id='timeCounter' >0:00</span></p>
+        </nav>
 
-    <!-- this is the nav -->
-    <nav class='nav nav-off'>
-        <a href=""><div class="nav-score">Vew Highscores</div></a>
-        <span id='timeReduct' ><div class="nav-timer">Time: <span id='counter'>2:00</span></div></span>
-    </nav>
+        <!-- this is the intro card !!!!!!!!!!!-->
+        <div class="introCard spaceDown hide ">
+            <h3 class='spaceDown' >Coding Quiz Challenge</h3>
+            <p class='spaceDown'>try to answer the following code-related questions within the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!</p>
+            <button id='startButton' class="button"> Start Quiz </button>
+        </div>
 
-    <!-- this is the cards -->
-    <main class='cards'>
-        <h3>Coding Quiz Challenge</h3>
-        <p>Try to answer the follogin code-related queatons within the time limit. keep in mind that incorrect answers will penalize your scoetime by ten seconds.</p>
-        <button id='initButton' >Start Quiz</button>
+
+
+        <!-- these will be the question cards !!!!!!!!!!!!!!! -->
+        <div class="questionCards hide ">
+            <!-- this is the question itself-->
+            <div class="spaceDown">
+                    <h3 id='questionCardsTitle' >sample</h3>
+            </div>
+            <!-- these are the buttons for answering -->
+            <div class="bottom spaceDown ">
+                <div><button class="button">1. <span id='but1'>sample</span> </button></div>
+                <div><button class="button">2. <span id='but2'>sample</span> </button></div>
+                <div><button class="button">3. <span id='but3'>sample</span></button></div>
+                <div><button class="button">4. <span id='but4'>sample</span></button></div>
+            </div>
+            <div class="line hide"></div>
+            <div class="com">
+                <div class="correct answerStyle hide ">Correct!</div>
+                <div class="wrong answerStyle hide">Wrong!</div>
+            </div>
+        </div>
+
+
+        <!-- this will be the end card !!!!!!!!!!!!!!! -->
+        <div class="allDone hide ">
+                <h3 class='spaceDown'>All done!</h3>
+                <p class='spaceDown'>Your final score is <span id='finalScore'>sample</span>%</p>
+                <div class="enterInitials">
+                    <label id='initials' for="initals"> Enter initials: </label>
+                    <input id='inputInit' type="text">
+                    <button id='doneSubmit' class='button'>Submit</button>
+                </div>
+        </div>
+
+
+        <!-- this will be the highscore section -->
+    <div class="highScores hide ">
+        <h3 class='spaceDown'>Highscores:</h3>
+        <div id='scores'>
+        </div>
+        <div>
+            <button id='goBackButton' class='button'>Go Back</button>
+            <button id='clearButton' class='button'>Clear Highscores</button>
+        </div>
+    </div>
+
+        
     </main>
 
 
-
-
-
-<input type="color">
-
-
-
-
-    <img src="imgs/pic.gif" alt="">
-    <img src="imgs/Screen Shot 2019-10-04 at 2.31.00 PM.png" alt="">
-    <!-- <img src="imgs/Screen Shot 2019-10-04 at 2.31.04 PM.png" alt=""> -->
-    
-    <script src='/js/questions.js'></script>
-    <script src='/js/script.js'></script>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/questions.mjs"></script>
 </body>
 </html>

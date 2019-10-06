@@ -10,3 +10,6 @@ var questions = [
       answer: "parentheses"
     },
   ];
+
+
+export default questions;
