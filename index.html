@@ -15,14 +15,14 @@
     <main class="container">
         <!-- this is the Nav !!!!!!!!!!!!!-->
         <nav class='spaceDown'>
-            <a id='highScoreLink' href="#">View Highscores</a>
+            <div><a id='highScoreLink' href="#">View Highscores</a></div>
             <p>Time: <span id='timeCounter' >0:00</span></p>
         </nav>
 
         <!-- this is the intro card !!!!!!!!!!!-->
         <div class="introCard spaceDown hide ">
             <h3 class='spaceDown' >Coding Quiz Challenge</h3>
-            <p class='spaceDown'>try to answer the following code-related questions within the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!</p>
+            <p class='spaceDown'>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by <span id='ten'>10</span> seconds!</p>
             <button id='startButton' class="button"> Start Quiz </button>
         </div>
 
@@ -44,7 +44,7 @@
             <div class="line hide"></div>
             <div class="com">
                 <div class="correct answerStyle hide ">Correct!</div>
-                <div class="wrong answerStyle hide">Wrong!</div>
+                <div class="wrong answerStyle hide">Wrong! -5 Seconds</div>
             </div>
         </div>
 
@@ -74,7 +74,6 @@
 
         
     </main>
-
 
     <script type="module" src="js/script.js"></script>
     <script type="module" src="js/questions.mjs"></script>

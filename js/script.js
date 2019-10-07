@@ -21,7 +21,7 @@ const scoreBoard = document.querySelector('#scores');
 const clearButton = document.querySelector("#clearButton");
 const highScoreLink = document.querySelector('#highScoreLink');
 const goBackButton = document.querySelector('#goBackButton');
-const line = document.querySelector('line')
+const line = document.querySelector('.line')
 
 let dataLength=[];
 let q;
@@ -32,7 +32,6 @@ let seconds;
 let intervalId;
 let scoreList=[];
 
-
 // functions section
 function loadData(){
     for (let i in questions){
@@ -40,18 +39,31 @@ function loadData(){
     }
 }
 
-
-
 function updateScore(x){
-    scoreList.push(`<p>${scoreList.length+1}. Name: ${x}, Score: ${score}%</p>`)
-    goToHighscore()
+    let str;
+    if (localStorage.getItem('scoreData') === null){
+        if (typeof x === typeof undefined ){
+        } else{
+            scoreList.push( {name : `${x}`, score : `${score}` })
+            str = JSON.stringify(scoreList)
+            localStorage.setItem('scoreData', str); 
+        }
+    } else{
+        str = localStorage.getItem('scoreData'); 
+        str = JSON.parse(str);
+        str.push( {name : `${x}`, score : `${score}` })
+        scoreList = str;
+        str = JSON.stringify(str);
+        localStorage.setItem('scoreData',str)
+    }
+
 };
 
 function clearScore(){
     scoreBoard.innerHTML = 'Emptied' ;
     scoreList=[];
+    localStorage.clear()
 }
-
 
 function reset(){
     dataLength=[];
@@ -66,21 +78,34 @@ function goHome(){
     wrong.classList.add('hide');
     allDone.classList.add('hide');
     introCard.classList.remove('hide');
+}
 
+function showScoreList(){
+    let virtualBoard='';
+    let x;
+    scoreList=localStorage.getItem('scoreData');
+    scoreList = JSON.parse(scoreList);
+    x = scoreList.sort(function(b,a){
+        return a.score - b.score
+    })
+    scoreList=[];
+    for (let i in x ){
+        scoreList.push(`<p>${(Number(i)+1)}. Name: ${x[i].name}, Score: ${x[i].score}%</p>`)
+    }
+    for (let i in scoreList){
+        virtualBoard = virtualBoard + scoreList[i]
+    }
+    scoreBoard.innerHTML = virtualBoard;
 }
 
 function goToHighscore(){
-    let virtualBoard='';
     questionCards.classList.add('hide');
     correct.classList.add('hide');
     wrong.classList.add('hide');
     allDone.classList.add('hide');
     introCard.classList.add('hide');
     highScores.classList.remove('hide')
-    for (let i in scoreList){
-        virtualBoard = virtualBoard + scoreList[i]
-    }
-    scoreBoard.innerHTML = virtualBoard;
+    showScoreList()
     clearButton.addEventListener('click', clearScore )
     goBackButton.addEventListener('click',goHome)
 }
@@ -90,6 +115,7 @@ function writeScore(){
         allDone.classList.add('hide');
         highScores.classList.remove('hide')
         updateScore(inputInit.value)
+        goToHighscore();
     }
 }
 
@@ -105,10 +131,14 @@ function done(){
 
 function result(e){
     if (e.path[0].textContent === answer){
+        let ding = new Audio('../sound/correct.mp3');
+        ding.play();
         setTimeout(()=>{
             correct.classList.remove('hide');
+            line.classList.remove('hide')
             setTimeout(()=>{
                 correct.classList.add('hide');
+                line.classList.add('hide')
             },1000)
         },0)
         wrong.classList.add('hide');
@@ -119,10 +149,14 @@ function result(e){
             loadCard()
         }
     } else {
+        let ding = new Audio('../sound/wrong.mp3');
+        ding.play();
         setTimeout(()=>{
             wrong.classList.remove('hide');
+            line.classList.remove('hide')
             setTimeout(()=>{
                 wrong.classList.add('hide');
+                line.classList.add('hide')
             },1000)
         },0)
         if (seconds === 0){
@@ -189,14 +223,17 @@ function startQuiz(){
     loadCard()
 }
 
-
+function color (){
+    timeCounter.style.color = 'red';
+}
 
 // 1.preparing functions
 loadData()
+updateScore()
+
+
 
 // 2.the listeners
 introCard.classList.remove('hide')
 startButton.addEventListener('click',startQuiz)
 highScoreLink.addEventListener('click',goToHighscore)
-
-
