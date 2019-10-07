@@ -176,10 +176,10 @@ function result(e){
         },0)
         if (seconds === 0){
             setTimeout(()=>{
-                seconds = seconds - 5
+                seconds = seconds - 10
             },1001)
         }else{
-            seconds = seconds - 5
+            seconds = seconds - 10
         }
         correct.classList.add('hide');
         if (dataLength.length ===0 ){
