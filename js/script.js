@@ -23,7 +23,7 @@ const highScoreLink = document.querySelector('#highScoreLink');
 const goBackButton = document.querySelector('#goBackButton');
 const line = document.querySelector('.line')
 const category = document.querySelector('.category');
-const categoryButtons = document.querySelectorAll('.category button');
+const allButtons = document.querySelectorAll('.button')
 
 let categoryData=[]
 let dataLength=[];
@@ -257,3 +257,8 @@ function color (){
 introCard.classList.remove('hide')
 startButton.addEventListener('click',chooseCateg)
 highScoreLink.addEventListener('click',goToHighscore)
+allButtons.forEach((button)=>{
+    button.addEventListener('onFocus',function(){
+        button.blur()
+    })
+})
