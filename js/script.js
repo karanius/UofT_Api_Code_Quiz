@@ -257,8 +257,3 @@ function color (){
 introCard.classList.remove('hide')
 startButton.addEventListener('click',chooseCateg)
 highScoreLink.addEventListener('click',goToHighscore)
-allButtons.forEach((button)=>{
-    button.addEventListener('onFocus',function(){
-        button.blur()
-    })
-})
