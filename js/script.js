@@ -1,6 +1,6 @@
 import questions from './questions.mjs'
 
-// the element variables
+// the elements and variables
 const timeCounter = document.getElementById('timeCounter');
 const startButton = document.getElementById('startButton');
 const introCard = document.querySelector('.introCard')
@@ -22,7 +22,10 @@ const clearButton = document.querySelector("#clearButton");
 const highScoreLink = document.querySelector('#highScoreLink');
 const goBackButton = document.querySelector('#goBackButton');
 const line = document.querySelector('.line')
+const category = document.querySelector('.category');
+const categoryButtons = document.querySelectorAll('.category button');
 
+let categoryData=[]
 let dataLength=[];
 let q;
 let answer;
@@ -33,9 +36,19 @@ let intervalId;
 let scoreList=[];
 
 // functions section
-function loadData(){
-    for (let i in questions){
-        dataLength.push(i)
+
+
+function loadData(x){
+    if (x === 'Computer Quiz'){
+        categoryData=questions[0]
+        for ( let i in questions[0]){
+            dataLength.push(Number([i].join()))
+        }
+    }else{
+        categoryData=questions[1]
+        for ( let i in questions[1]){
+            dataLength.push(Number([i].join()))
+        }
     }
 }
 
@@ -56,7 +69,6 @@ function updateScore(x){
         str = JSON.stringify(str);
         localStorage.setItem('scoreData',str)
     }
-
 };
 
 function clearScore(){
@@ -67,7 +79,6 @@ function clearScore(){
 
 function reset(){
     dataLength=[];
-    loadData()
     clearInterval(intervalId);
 }
 
@@ -83,19 +94,24 @@ function goHome(){
 function showScoreList(){
     let virtualBoard='';
     let x;
-    scoreList=localStorage.getItem('scoreData');
-    scoreList = JSON.parse(scoreList);
-    x = scoreList.sort(function(b,a){
-        return a.score - b.score
-    })
-    scoreList=[];
-    for (let i in x ){
-        scoreList.push(`<p>${(Number(i)+1)}. Name: ${x[i].name}, Score: ${x[i].score}%</p>`)
+    if (localStorage.getItem('scoreData') === null){
+        console.log('!')
+        scoreBoard.innerHTML = 'No Scores Yet'
+    }else{
+        scoreList=localStorage.getItem('scoreData');
+        scoreList = JSON.parse(scoreList);
+        x = scoreList.sort(function(b,a){
+            return a.score - b.score
+        })
+        scoreList=[];
+        for (let i in x ){
+            scoreList.push(`<p>${(Number(i)+1)}. Name: ${x[i].name}, Score: ${x[i].score}%</p>`)
+        }
+        for (let i in scoreList){
+            virtualBoard = virtualBoard + scoreList[i]
+        }
+        scoreBoard.innerHTML = virtualBoard;
     }
-    for (let i in scoreList){
-        virtualBoard = virtualBoard + scoreList[i]
-    }
-    scoreBoard.innerHTML = virtualBoard;
 }
 
 function goToHighscore(){
@@ -123,9 +139,8 @@ function done(){
     clearInterval(intervalId)
     questionCards.classList.add('hide');
     allDone.classList.remove('hide');
-    score = ((score/questions.length)*100)
+    score = Math.floor(((score/categoryData.length)*100))
     finalScore.textContent = score;
-
     doneSubmit.addEventListener('click',writeScore);
 }
 
@@ -180,12 +195,12 @@ function loadCard(){
     wrong.classList.add('hide');
     correct.classList.add('hide');
     q = dataLength.shift()
-    answer = questions[q].answer
-    questionCardsTitle.textContent = questions[q].title;
-    but1.textContent = questions[q].choices[0]
-    but2.textContent = questions[q].choices[1]
-    but3.textContent = questions[q].choices[2]
-    but4.textContent = questions[q].choices[3]
+    answer = categoryData[q].answer
+    questionCardsTitle.textContent = categoryData[q].title;
+    but1.textContent = categoryData[q].choices[0]
+    but2.textContent = categoryData[q].choices[1]
+    but3.textContent = categoryData[q].choices[2]
+    but4.textContent = categoryData[q].choices[3]
     but1.addEventListener('click',result)
     but2.addEventListener('click',result)
     but3.addEventListener('click',result)
@@ -215,25 +230,30 @@ function startTimer(){
     },1000);
 }
 
-function startQuiz(){
-    score=0;
-    introCard.classList.add('hide');
+function startQuiz(e){
     reset()
+    document.querySelectorAll('.category button')[0].removeEventListener('click',startQuiz);
+    document.querySelectorAll('.category button')[1].removeEventListener('click',startQuiz)
+    category.classList.add('hide')
+    loadData(e.path[0].textContent)
+    score=0;
     startTimer()
     loadCard()
 }
+
+function chooseCateg(){
+    introCard.classList.add('hide');
+    category.classList.remove('hide')
+    document.querySelectorAll('.category button')[0].addEventListener('click',startQuiz);
+    document.querySelectorAll('.category button')[1].addEventListener('click',startQuiz)
+};
 
 function color (){
     timeCounter.style.color = 'red';
 }
 
-// 1.preparing functions
-loadData()
-updateScore()
 
-
-
-// 2.the listeners
+// 1.the listeners
 introCard.classList.remove('hide')
-startButton.addEventListener('click',startQuiz)
+startButton.addEventListener('click',chooseCateg)
 highScoreLink.addEventListener('click',goToHighscore)

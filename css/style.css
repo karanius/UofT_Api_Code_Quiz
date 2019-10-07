@@ -82,12 +82,12 @@ color: black;
     outline: none;
 }
 
-.introCard{
+.introCard, .category{
     text-align: center;
     padding: 0 15%;
 }
 
-.introCard h3{
+.introCard h3, .category{
     font-size: 30px;
     font-weight: 900;
 }
@@ -96,6 +96,11 @@ color: black;
     font-size: 15px;
     font-weight: 600;
 }
+
+
+
+
+
 
 .spaceDown{
     margin-bottom: 25px;
