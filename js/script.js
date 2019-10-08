@@ -1,4 +1,7 @@
 import questions from './questions.mjs'
+let tl = new TimelineMax()
+
+
 
 // the elements and variables
 const timeCounter = document.getElementById('timeCounter');
@@ -24,6 +27,7 @@ const goBackButton = document.querySelector('#goBackButton');
 const line = document.querySelector('.line')
 const category = document.querySelector('.category');
 const allButtons = document.querySelectorAll('.button')
+
 
 let categoryData=[]
 let dataLength=[];
@@ -142,6 +146,7 @@ function done(){
     score = Math.floor(((score/categoryData.length)*100))
     finalScore.textContent = score;
     doneSubmit.addEventListener('click',writeScore);
+    tl.to(timeCounter,0.2,{color:'blue'});
 }
 
 function result(e){
@@ -211,7 +216,7 @@ function loadCard(){
 
 function startTimer(){
     seconds = 0;
-    let minutes = 2;
+    let minutes = 1;
     time = minutes+':'+seconds;
     timeCounter.textContent = time
     intervalId = setInterval(()=>{
@@ -222,7 +227,9 @@ function startTimer(){
         seconds --;
         time = minutes+':'+seconds;
         timeCounter.textContent = time
+        tl.to(timeCounter,1,{color:'red',repeat:-1});
         if (time === '0:0' ){
+            tl.kill()
             clearInterval(intervalId);
             clearInterval(setInterval);
             done();
@@ -257,3 +264,4 @@ function color (){
 introCard.classList.remove('hide')
 startButton.addEventListener('click',chooseCateg)
 highScoreLink.addEventListener('click',goToHighscore)
+
