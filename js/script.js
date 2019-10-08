@@ -182,8 +182,12 @@ function result(e){
         if (seconds === 0){
             setTimeout(()=>{
                 seconds = seconds - 10
+                tl.to(timeCounter,0.5,{color:'red',})
+                .to(timeCounter,0.2,{color:'black',});
             },1001)
         }else{
+            tl.to(timeCounter,0.5,{color:'red',})
+            .to(timeCounter,0.2,{color:'black',});
             seconds = seconds - 10
         }
         correct.classList.add('hide');
@@ -227,9 +231,7 @@ function startTimer(){
         seconds --;
         time = minutes+':'+seconds;
         timeCounter.textContent = time
-        tl.to(timeCounter,1,{color:'red',repeat:-1});
         if (time === '0:0' ){
-            tl.kill()
             clearInterval(intervalId);
             clearInterval(setInterval);
             done();
