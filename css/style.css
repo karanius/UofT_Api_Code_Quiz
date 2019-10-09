@@ -21,6 +21,8 @@ nav{
     background-color: rgb(158, 95, 218);
     overflow: hidden;
     padding: 10px 10px ;
+    border-bottom: 3px solid rgb(233, 185, 255);
+    box-shadow: 0px -10px 10px 10px black;
 }
 nav p{
     width: 85px;
@@ -49,9 +51,10 @@ color: black;
 }
 
 .button{
+    position: relative;
     box-sizing: border-box;
-    background-color: rgb(124, 23, 219);
-    border:none;
+    background-color: rgb(157, 75, 235);
+    border:1px solid rgba(99, 99, 99, 0.616);
     height: 35px;
     color:white;
     padding: 0px 10px;
@@ -59,19 +62,21 @@ color: black;
     margin: 10px;
     font-size: 15px;
     cursor: pointer;
-    
+    top: 2px;
+    box-shadow: 0px 10px 5px -6px rgb(112, 112, 112);
+    transition: box-shadow 0.2s, top 0.2s;    
 }
 
 .button:hover{  
-    box-shadow: 0px 4px 5px 0px rgb(190, 190, 190);
+    box-shadow: 0px 18px 8px -10px rgb(170, 170, 170);
     background-color: rgba(124, 23, 219, 0.856);
-    
+    top: 1px;
 }
 
-.button:active{
+.button:active {
     background-color: rgb(149, 57, 235); 
-       
 }
+
 .button:focus{
     outline: none;
     background-color: rgb(124, 23, 219);
