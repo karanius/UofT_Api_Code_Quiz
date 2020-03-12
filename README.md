@@ -1,6 +1,6 @@
 # UofT SCS Full-Stack Web Development Boot Camp Project #4: Code Quiz
 
-## [Live Link](https://karanius.github.io/WebApi/)
+## [Live Link](https://karanius.github.io/UofT_Api_Code_Quiz/)
 
 ![](screenShot.gif)
 
