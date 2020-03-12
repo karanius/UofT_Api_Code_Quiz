@@ -2,19 +2,20 @@
 
 ## [Live Link](https://karanius.github.io/WebApi/)
 
-![](screenShot.png)
+![](screenShot.gif)
 
 A timed quiz application with multiple choice questions on JavaScript fundamentals that stores high scores for users to gauge progress compared to peers
 
 ## Table of Contents
 
-1. [About the Project](#about-the-project)
-2. [API(s) Used](#apis(s)-used)
-3. [Development Strategy](#development-strategy)
-4. [Additional Features](#additional-features)
-5. [Getting Started](#getting-started) 
-6. [Built With](#built-with)
-8. [Licence](#licence)
+- [UofT SCS Full-Stack Web Development Boot Camp Project #4: Code Quiz](#uoft-scs-full-stack-web-development-boot-camp-project-4-code-quiz)
+  - [Live Link](#live-link)
+  - [Table of Contents](#table-of-contents)
+  - [About the Project](#about-the-project)
+  - [Minimun Requirements](#minimun-requirements)
+  - [Built With](#built-with)
+  - [Development Strategy](#development-strategy)
+  - [Additional Features](#additional-features)
 
 ## About the Project
 
